@@ -1,0 +1,59 @@
+.exploreContainer {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
+    row-gap: 5px; /* Smaller gap between rows */
+    column-gap: 50px; /* Slightly larger gap between columns (you can adjust this) */
+    padding: 20px;
+  }
+  
+  .card {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    padding: 20px;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 350px;
+    width: 100%; /* Ensure the card fills the available space */
+  }
+  
+  .card:hover {
+    transform: translateY(-10px);
+  }
+  
+  .cardImage {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  .cardContent {
+    margin-top: 15px;
+  }
+  
+  .cardContent h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .cardContent p {
+    font-size: 1rem;
+    color: #555;
+  }
+  

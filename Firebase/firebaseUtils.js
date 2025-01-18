@@ -1,5 +1,5 @@
 import {database} from './firebaseConfig';
-import { ref, set, get, query, orderByChild, child } from "firebase/database";
+import { ref, set, get, query, orderByChild, equalTo } from "firebase/database";
 
 //Writes facts to database
 export const writeFact = async (factId, text, source, seenCount = 0, unseenCount = 0, isUnknown = false) => {
@@ -24,7 +24,7 @@ export const getAllFacts = async () => {
       if (snapshot.exists()) {
         snapshot.forEach((childSnapshot) => {
             const factId = childSnapshot.key;
-            const factData = childSnapshot.val;
+            const factData = childSnapshot.val();
             facts.push({factId, ...factData});
         })
         return facts;
@@ -34,7 +34,7 @@ export const getAllFacts = async () => {
     } catch (error) {
       console.error("Error fetching facts:", error);
     }
-  };
+};
  
 // Updates isUnknown based on percentage of seen/unseen
 async function updateUnknown(factId) {
@@ -97,8 +97,9 @@ export const updateFactCount = async(factId, type) => {
 
 export const getRandUnknown = async () => {
     const factsRef = ref(database, 'facts');
-    const factsQuery = query(factsRef, orderByChild('flag'), equalTo(true));
-
+    console.log("Querying Unknown")
+    const factsQuery = query(factsRef, orderByChild('isUnknown'), equalTo(true));
+    console.log(`Queried: ${factsQuery}`);
     try {
         const snapshot = await get(factsQuery);
 

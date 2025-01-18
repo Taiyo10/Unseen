@@ -1,43 +1,46 @@
 import React, { useEffect, useState } from "react";
-import { getDatabase, ref, onValue } from "firebase/database";
+import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
+import styles from "./Explore.module.css"; // Import your CSS module for styling
+import { getRandUnknown } from "../../../../Firebase/firebaseUtils";
 
-const DisplayFacts = () => {
-  const [facts, setFacts] = useState([]);
-  const database = getDatabase();
+// Sample data - replace this with your actual data
+function Explore() {
+  const [data, setData] = useState([]);
+  const navigate = useNavigate(); // Initialize useNavigate for navigation
 
   useEffect(() => {
-    const factsRef = ref(database, "facts"); // Reference to the "facts" node in the database
-    const unsubscribe = onValue(factsRef, (snapshot) => {
-      if (snapshot.exists()) {
-        const data = snapshot.val();
-        // Transform data into an array of { id, text } objects
-        const factsArray = Object.entries(data).map(([id, fact]) => ({
-          id,
-          text: fact.text,
-        }));
-        setFacts(factsArray);
-      } else {
-        setFacts([]); // If no facts exist, set to an empty array
+    const fetchrandFacts = async () => {
+      try {
+        const factsData = await getRandUnknown(); // Fetch the data
+        console.log("Fetched facts:", factsData);
+        setData(factsData || []); // Set the data state (fallback to an empty array)
+      } catch (error) {
+        console.error("Error fetching facts:", error); // Log errors for debugging
       }
-    });
-
-    return () => unsubscribe(); // Cleanup listener when component unmounts
-  }, [database]);
+    }
+    fetchrandFacts();
+  }, []);
 
   return (
-    <div>
-      <h1>Facts List</h1>
-      {facts.length > 0 ? (
-        <ul>
-          {facts.map((fact) => (
-            <li key={fact.id}>{fact.text}</li>
-          ))}
-        </ul>
-      ) : (
-        <p>No facts found!</p>
-      )}
+    <div className={styles.exploreContainer}>
+      <h1>Explore Facts</h1>
+      <div className={styles.grid}>
+        {data.map((fact) => (
+          <div
+            key={fact.factId}
+            className={styles.card}
+            onClick={() => navigate(`/game/${fact.id}`)}
+            style={{ backgroundColor: "#D3D3D3" }} // Set background color to light gray
+          >
+            <div className={styles.cardContent}>
+              <h3>{fact.text}</h3>
+              <p>{fact.source}</p>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
-};
+}
 
-export default DisplayFacts;
+export default Explore;
