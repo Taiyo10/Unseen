@@ -1,0 +1,39 @@
+/* AboutUs.module.css */
+
+/* About Us Page Styling */
+.about-us-container {
+    font-family: 'Roboto', sans-serif; 
+    background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent black background */
+    max-width: 800px; /* Limits the width of the container */
+    margin: 50px auto; /* Centers the container on the page */
+
+    color: #fff; /* Text color */
+    padding: 20px; /* Adds padding inside the container */
+    border-radius: 10px; /* Optional: Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Adds a subtle shadow */
+    line-height: 1.6; /* Improves readability */
+  }
+  
+  .about-us-container h1 {
+    font-family: 'Roboto', sans-serif; 
+    color: #f1f1f1;           /* Light color for the heading */
+    font-size: 36px;
+  }
+  
+  .about-us-container p {
+    font-family: 'Roboto', sans-serif; 
+    color: #ccc;              /* Slightly lighter text for paragraph */
+    font-size: 18px;
+  }
+  
+  body {
+    font-family: 'Roboto', sans-serif; 
+    background-color: #121212; /* Dark background for the entire page */
+    color: #fff;              /* Light text for the entire page */
+    margin: 0;
+    font-family: Arial, sans-serif;
+    justify-content: center; /* Horizontally center the container */
+  align-items: center; /* Vertically center the container */
+  
+  }
+  

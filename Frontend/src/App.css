@@ -1,36 +1,106 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* General body styles */
+
+
+/* Global body styles for the background image */
+body {
+  background-image: url('./pages/background2.jpg'); /* Replace with your image path */
+  background-size: cover; /* Scale the image to cover the entire viewport */
+  background-position: center; /* Center the image */
+  background-attachment: fixed; /* Makes the background static when scrolling */
+  background-repeat: no-repeat; /* Prevent tiling of the image */
+  margin: 0; /* Reset body margin */
+  padding: 0; /* Reset body padding */
+  color: #fff; /* Ensure text color contrasts with the background */
+  font-family: 'Roboto', sans-serif; 
+  background-color: #121212; /* Dark background for the entire page */
+  color: #fff;               /* Light text for better readability */
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
+/* Website header styles */
+.website-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /*background-color: #333; /* Background color for the header */
+  color: #fff;            /* Text color */
+  padding: 20px;          /* Spacing around the header */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow */
+}
+
+/* Title and logo container */
+.title-container {
+  /*background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+  display: flex;
+  align-items: center; /* Align logo and text vertically */
+  gap: 15px;           /* Space between the logo and text */
+}
+
+/* Logo styling */
 .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  width: 60px;         /* Logo width */
+  height: 60px;        /* Logo height */
+  border-radius: 50%;  /* Makes the logo circular */
+  object-fit: cover;   /* Ensures proper scaling */
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Title text styling */
+.title-text h1 {
+  font-size: 36px; /* Title font size */
+  margin: 0;       /* Remove default margin */
+}
+
+.title-text p {
+  font-size: 16px; /* Subtitle font size */
+  margin: 0;       /* Remove default margin */
+  font-style: italic; /* Optional: Italic subtitle */
+}
+
+/* Navigation bar styles */
+.tab-bar {
+  /*background-color: #333; /* Dark background for the navbar */
+  padding: 10px 0;        /* Padding for spacing */
+  width: 100%;            /* Full width */
+  /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for the navbar */
+}
+
+.tab-bar ul {
+  list-style: none;       /* Remove default list style */
+  margin: 0;              /* Remove default margin */
+  padding: 0;             /* Remove default padding */
+  display: flex;
+  justify-content: center; /* Center align the tabs */
+  gap: 20px;              /* Add space between tabs */
+}
+
+.tab-bar li {
+  margin: 0; /* Remove unnecessary margins */
+}
+
+.tab-bar a {
+  color: #f1f1f1;           /* Light text color for links */
+  text-decoration: none;    /* Remove underline */
+  font-size: 18px;          /* Font size */
+  padding: 8px 16px;        /* Padding for clickable area */
+  border-radius: 5px;       /* Rounded corners */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effects */
+}
+
+.tab-bar a:hover {
+  background-color: #555;   /* Darker background on hover */
+  transform: scale(1.1);    /* Slight zoom effect */
+}
+
+.tab-bar a:active {
+  background-color: #777;   /* Even darker background when active */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .tab-bar ul {
+    flex-direction: column; /* Stack items vertically on small screens */
+    gap: 10px;              /* Space between stacked items */
   }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }
