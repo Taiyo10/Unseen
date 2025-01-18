@@ -20,3 +20,5 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 // Initialize Database
 const database = getDatabase(app);
+
+export {database}
