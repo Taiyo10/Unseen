@@ -1,7 +1,7 @@
 {
   "hosting": {
     "site": "unseen",
-    "public": "build",
+    "public": "frontend/dist",
     "ignore": [
       "firebase.json",
       "**/.*",
