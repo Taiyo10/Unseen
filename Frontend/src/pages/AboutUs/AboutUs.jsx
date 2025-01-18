@@ -18,10 +18,7 @@ function AboutUs() {
         </p>
         <h2>Our Vision</h2>
         <p>
-          At Unseen, we believe in the power of knowledge to drive change. Every individual has a unique perspective, 
-          and by uncovering the "unseen" truths together, we can create a better-informed society that’s ready to tackle global issues. 
-          Whether it's environmental crises, societal inequalities, or scientific advancements, Unseen is here to shed light 
-          on the facts that matter.
+        Every individual has a unique perspective, and by uncovering the "unseen" truths together, we can create a better-informed society that’s equipped to tackle global problems. Whether it's environmental crises, societal inequalities, or scientific advancements, Unseen is here to bring attention to the facts that matter most.
         </p>
         <h2>How It Works</h2>
         <p>
@@ -35,9 +32,7 @@ function AboutUs() {
         </ul>
         <h2>Why It Matters</h2>
         <p>
-          Knowledge is the foundation of change. By helping you uncover and understand the facts you didn’t know, we aim to foster 
-          informed discussions and build a shared consensus on pressing global challenges. Together, we can shine a spotlight on 
-          the issues that deserve our attention.
+        Unseen’s mission is simple: to empower you with knowledge that can spark change. By uncovering facts that are often overlooked, we encourage informed conversations that lead to collective action on global challenges. Developed as a solution during a hackathon, Unseen reflects the innovation and collaboration that are key to tackling pressing world issues.
         </p>
         <h2>Our Team</h2>
         <p>

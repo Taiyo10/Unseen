@@ -4,6 +4,7 @@ import styles from "./Explore.module.css"; // Import your CSS module for styling
 
 // Sample data - replace this with your actual data
 const fetchData = () => {
+
   return [
     {
       id: 1,
@@ -30,11 +31,11 @@ const fetchData = () => {
       title: "Interesting Fact 5",
       description: "This is a short description of the fifth interesting fact.",
     },
-    // Add more objects with facts
   ];
 };
 
 function Explore() {
+
   const [data, setData] = useState([]);
   const navigate = useNavigate(); // Initialize useNavigate for navigation
 
@@ -44,15 +45,22 @@ function Explore() {
   }, []);
 
   return (
+    
     <div className={styles.exploreContainer}>
-      <h1>Explore Facts</h1>
+      <br>
+      </br>
+      <h1>Explore the Unknown</h1>
+      <p className={styles.pageDescription}>
+        Dive into a collection of fascinating and lesser-known facts, waiting to be explored. Scroll down to discover more!
+      </p>
       <div className={styles.grid}>
         {data.map((fact) => (
           <div
             key={fact.id}
             className={styles.card}
             onClick={() => navigate(`/game/${fact.id}`)}
-            style={{ backgroundColor: "#D3D3D3" }} // Set background color to light gray
+            style={{ backgroundColor: "#D3D3D3" }}
+            aria-label={`Explore fact titled ${fact.title}`}
           >
             <div className={styles.cardContent}>
               <h3>{fact.title}</h3>
@@ -66,3 +74,4 @@ function Explore() {
 }
 
 export default Explore;
+

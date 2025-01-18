@@ -4,7 +4,7 @@ import Home from "./pages/Home/Home"; // Ensure this is the correct import path
 import AboutUs from "./pages/AboutUs/AboutUs";
 import Explore from "./pages/Explore/Explore";
 import Game from "./pages/Game/Game";
-import "./App.css";
+import "./App.css"; // App.css will contain your footer styles
 import logo from "./pages/image.png"; // Ensure logo is in the correct path
 
 function App() {
@@ -16,16 +16,15 @@ function App() {
             <img src={logo} alt="Unseen Logo" className="logo" />
             <div className="title-text">
               <center><h1>Unseen</h1></center>
-              <p>Discover the Facts That Matter</p>
             </div>
           </div>
         </header>
         <nav className="tab-bar">
           <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/game">Game</Link></li>
-            <li><Link to="/explore">Explore</Link></li>
-            <li><Link to="/aboutus">About</Link></li>
+            <li><Link to="/">HOME</Link></li>
+            <li><Link to="/game">GAME</Link></li>
+            <li><Link to="/explore">EXPLORE</Link></li>
+            <li><Link to="/aboutus">ABOUT US</Link></li>
           </ul>
         </nav>
         <Routes>
@@ -35,9 +34,14 @@ function App() {
           <Route path="/game" element={<Game />} />
           <Route path="/explore" element={<Explore />} />
         </Routes>
+        {/* Footer */}
+        <footer className="footer-container">
+          <p>© 2025 Unseen. All rights reserved.</p>
+        </footer>
       </div>
     </Router>
   );
 }
 
 export default App;
+
