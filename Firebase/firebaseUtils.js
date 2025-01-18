@@ -24,7 +24,7 @@ export const getAllFacts = async () => {
       if (snapshot.exists()) {
         snapshot.forEach((childSnapshot) => {
             const factId = childSnapshot.key;
-            const factData = childSnapshot.val;
+            const factData = childSnapshot.val();
             facts.push({factId, ...factData});
         })
         return facts;
@@ -36,64 +36,43 @@ export const getAllFacts = async () => {
     }
   };
  
-// Updates isUnknown based on percentage of seen/unseen
-async function updateUnknown(factId) {
-    const factRef = ref(database, 'facts/' + factId);
 
+export const updateFactCount = async (factId, type) => {
+    const factRef = ref(database, 'facts/' + factId); // Get reference to fact
     try {
-        const snapshot = await get(factRef);
-        if (snapshot.exists) {
-            const factData = snapshot.val;
-            const { seenCount, unseenCount } = factData;
-            const totalCount = seenCount + unseenCount;
-
-            // If more than 70% of count is unseen
-            if (unseenCount / totalCount >= 0.7) {
-                if (factData.isUnknown == false) {
-                    await set(factRef, {
-                        ...factData,
-                        isUnknown: true
-                    });
-                    console.log(`Fact: ${factData.text} isUnknown Flag updated to True`);
-                }
-            }
-        } else {
-            console.log("Fact not found");
+      const snapshot = await get(factRef); // Get data at factRef location
+      if (snapshot.exists()) { // Check if snapshot exists
+        const factData = snapshot.val(); // Get data from snapshot
+        const updatedData = {}; // Holds new updated object
+        
+        // Update the count based on type
+        if (type === 'seen') {
+          updatedData.seenCount = (factData.seenCount || 0) + 1; // Increment seenCount
+        } 
+        else if (type === 'unseen') {
+          updatedData.unseenCount = (factData.unseenCount || 0) + 1; // Increment unseenCount
         }
-    }
-    catch (error){
-        console.error("Error updating flag", error);
-    }
-  } 
-
-export const updateFactCount = async(factId, type) => {
-    const factRef = ref(database, 'facts/' + factId); //gets reference to fact
-    try {
-        const snapshot = await get(factRef) //gets data at factRef location
-        if (snapshot.exists) {
-            const factData = snapshot.val //Gets data from snapshot
-            const updatedData = {} //Holds new updated object
-            if (type == 'seen') {
-                updatedData.seenCount = factData.seenCount + 1; //gets new value
-            } 
-            else if (type == 'unseen') {
-                updatedData.unseenCount = factData.unseenCount + 1; //gets new value
-            }
-            await set(factRef, {
-                ...factData,
-                ...updatedData
-            });
-
-            //updates isUnknown flag 
-            await updateUnknown(factId);
-
-            console.log("Fact updated successfully ");
+        
+        //Updates unknown if number work
+        const totalCount = factData.seenCount + factData.unseenCount;
+        if ((factData.unseenCount / totalCount >= 0.7) && (factData.isUnknown = false)) {
+            factData.isUnknown = true;
+            console.log("Updating Unknown");
         }
+        
+        // Update the fact with the new counts
+        await set(factRef, {
+          ...factData,
+          ...updatedData,
+        });
+        
+  
+        console.log("Fact updated successfully ");
+      }
+    } catch (error) {
+      console.error("Error updating fact count", error);
     }
-    catch (error){
-        console.error("Error updating fact count", error);
-    }
-  }
+  };
 
 export const getRandUnknown = async () => {
     const factsRef = ref(database, 'facts');

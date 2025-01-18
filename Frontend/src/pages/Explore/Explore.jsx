@@ -1,28 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { getDatabase, ref, onValue } from "firebase/database";
+import { getAllFacts } from "../../../../Firebase/firebaseUtils"; // Import the getAllFacts function
 
 const DisplayFacts = () => {
   const [facts, setFacts] = useState([]);
-  const database = getDatabase();
 
   useEffect(() => {
-    const factsRef = ref(database, "facts"); // Reference to the "facts" node in the database
-    const unsubscribe = onValue(factsRef, (snapshot) => {
-      if (snapshot.exists()) {
-        const data = snapshot.val();
-        // Transform data into an array of { id, text } objects
-        const factsArray = Object.entries(data).map(([id, fact]) => ({
-          id,
-          text: fact.text,
-        }));
-        setFacts(factsArray);
+    const fetchFacts = async () => {
+      const fetchedFacts = await getAllFacts();
+      if (fetchedFacts) {
+        setFacts(fetchedFacts);
       } else {
-        setFacts([]); // If no facts exist, set to an empty array
+        setFacts([]); // If no facts are found, set to an empty array
       }
-    });
+    };
 
-    return () => unsubscribe(); // Cleanup listener when component unmounts
-  }, [database]);
+    fetchFacts(); // Call the fetchFacts function
+  }, []);
 
   return (
     <div>
@@ -30,7 +23,7 @@ const DisplayFacts = () => {
       {facts.length > 0 ? (
         <ul>
           {facts.map((fact) => (
-            <li key={fact.id}>{fact.text}</li>
+            <li key={fact.factId}>{fact.text}</li>
           ))}
         </ul>
       ) : (
