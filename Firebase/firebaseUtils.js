@@ -1,5 +1,5 @@
 import {database} from './firebaseConfig';
-import { ref, set, get, child } from "firebase/database";
+import { ref, set, get, query, orderByChild, child } from "firebase/database";
 
 //Writes facts to database
 export const writeFact = async (factId, text, source, seenCount = 0, unseenCount = 0, isUnknown = false) => {
@@ -19,8 +19,15 @@ export const getAllFacts = async () => {
     const factsRef = ref(database, 'facts'); // Reference to the facts node
     try {
       const snapshot = await get(factsRef);
+      const facts = []
+
       if (snapshot.exists()) {
-        return snapshot.val();
+        snapshot.forEach((childSnapshot) => {
+            const factId = childSnapshot.key;
+            const factData = childSnapshot.val;
+            facts.push({factId, ...factData});
+        })
+        return facts;
       } else {
         return null;
       }
@@ -29,8 +36,8 @@ export const getAllFacts = async () => {
     }
   };
  
-  // Updates isUnknown based on percentage of seen/unseen
-  async function updateUnknown(factId) {
+// Updates isUnknown based on percentage of seen/unseen
+async function updateUnknown(factId) {
     const factRef = ref(database, 'facts/' + factId);
 
     try {
@@ -54,12 +61,12 @@ export const getAllFacts = async () => {
             console.log("Fact not found");
         }
     }
-    catch {
-        console.error("Error updating flag", Error);
+    catch (error){
+        console.error("Error updating flag", error);
     }
   } 
 
-  export const updateFactCount = async(factId, type) => {
+export const updateFactCount = async(factId, type) => {
     const factRef = ref(database, 'facts/' + factId); //gets reference to fact
     try {
         const snapshot = await get(factRef) //gets data at factRef location
@@ -83,7 +90,46 @@ export const getAllFacts = async () => {
             console.log("Fact updated successfully ");
         }
     }
-    catch {
-        console.error("Error updating fact count", Error);
+    catch (error){
+        console.error("Error updating fact count", error);
     }
+  }
+
+export const getRandUnknown = async () => {
+    const factsRef = ref(database, 'facts');
+    const factsQuery = query(factsRef, orderByChild('flag'), equalTo(true));
+
+    try {
+        const snapshot = await get(factsQuery);
+
+        const facts = [];
+
+        if (snapshot.exists()) {
+            // Collect all the facts with flag = true
+            snapshot.forEach((childSnapshot) => {
+            const factId = childSnapshot.key;
+            const factData = childSnapshot.val();
+            facts.push({ factId, ...factData });
+            });
+        
+            const randomUnknown = getRandomItems(facts, count);
+
+            return randomUnknown;
+        } else {
+            console.log("No facts found with unknown flag");
+            return [];
+        }
+
+    } catch (error){ 
+        console.error('Error fetching Unknown Facts', error)
+    }
+}
+
+function getRandomItems(arr, count) {
+    const shuffled = [...arr]; // Copy the array to avoid mutating the original
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1)); // Get random index
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]; // Swap
+    }
+    return shuffled.slice(0, count); // Return the first 'count' items from the shuffled array
   }
