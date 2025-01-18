@@ -2,38 +2,118 @@
 
 /* About Us Page Styling */
 .about-us-container {
-    font-family: 'Roboto', sans-serif; 
-    background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent black background */
+    font-family: 'Roboto', sans-serif;
+    background-color: rgba(206, 215, 224, 0.8); /* Semi-transparent dark blue from palette */
     max-width: 800px; /* Limits the width of the container */
     margin: 50px auto; /* Centers the container on the page */
-
-    color: #fff; /* Text color */
-    padding: 20px; /* Adds padding inside the container */
-    border-radius: 10px; /* Optional: Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Adds a subtle shadow */
-    line-height: 1.6; /* Improves readability */
+    padding: 30px; /* Adds more padding for a spacious feel */
+    border-radius: 15px; /* Rounded corners for a softer look */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Adds a larger shadow for depth */
+    line-height: 1.8; /* Improves readability */
+    background: linear-gradient(135deg, #062c43, #054569); /* Gradient background for texture */
+    color: #fff; /* Light text color */
   }
   
+  /* Heading Style */
   .about-us-container h1 {
-    font-family: 'Roboto', sans-serif; 
-    color: #f1f1f1;           /* Light color for the heading */
+    font-family: 'Roboto', sans-serif;
+    color: #9ccddc; /* Light color for the heading */
     font-size: 36px;
+    text-align: center; /* Centers the heading */
+    margin-bottom: 30px; /* Adds space below the heading */
+    text-transform: uppercase; /* Makes the heading more striking */
+    letter-spacing: 2px; /* Slightly spaces out the letters */
   }
   
+  /* Paragraph Styling */
   .about-us-container p {
-    font-family: 'Roboto', sans-serif; 
-    color: #ccc;              /* Slightly lighter text for paragraph */
+    font-family: 'Roboto', sans-serif;
+    color: #ced7e0; /* Slightly lighter text for the paragraphs */
     font-size: 18px;
+    margin-bottom: 20px; /* Adds spacing between paragraphs */
+    text-align: justify; /* Justifies the text for a clean alignment */
+  }
+  
+  /* Subheading Styling */
+  .about-us-container h2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #5591a9; /* Lighter blue for subheading */
+    padding: 15px;
+    border-radius: 10px; /* Rounded corners for subheading bubble */
+    margin: 20px 0; /* Space above and below subheading */
+    text-transform: capitalize;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow effect */
+  }
+  
+  /* Smooth hover effect on subheadings */
+  .about-us-container h2:hover {
+    background-color: #9ccddc; /* Lighten background on hover */
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  /* Button Styling (optional) */
+  .about-us-button {
+    background-color: #054569; /* Darker blue from palette */
+    color: #fff; /* Text color */
+    padding: 12px 24px;
+    font-size: 18px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto; /* Centers the button */
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .about-us-button:hover {
+    background-color: #062c43; /* Darkest blue when hovered */
+    transform: translateY(-5px); /* Adds a subtle hover effect */
+  }
+  
+  /* Optional: Add a decorative border or section highlights for visual interest */
+  .about-us-container::before {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 4px;
+    background-color: #5591a9; /* Subtle color accent */
+    margin: 30px auto 20px;
+    border-radius: 5px;
   }
   
   body {
-    font-family: 'Roboto', sans-serif; 
+    font-family: 'Roboto', sans-serif;
     background-color: #121212; /* Dark background for the entire page */
-    color: #fff;              /* Light text for the entire page */
+    color: #fff; /* Light text for the entire page */
     margin: 0;
-    font-family: Arial, sans-serif;
+    display: flex;
     justify-content: center; /* Horizontally center the container */
-  align-items: center; /* Vertically center the container */
+    align-items: center; /* Vertically center the container */
+    min-height: 100vh; /* Ensure full-page height */
+    padding: 0 20px; /* Adds a little padding on the sides */
+  }
   
+  @media (max-width: 768px) {
+    /* For smaller screens */
+    .about-us-container {
+      padding: 20px;
+      margin: 20px;
+    }
+  
+    .about-us-container h1 {
+      font-size: 28px;
+    }
+  
+    .about-us-container p {
+      font-size: 16px;
+    }
+  
+    .about-us-container h2 {
+      font-size: 24px;
+    }
   }
   
