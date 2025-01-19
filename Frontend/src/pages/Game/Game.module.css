@@ -1,19 +1,69 @@
-.factContainer {
+/* Global Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif; /* Default font for body */
+}
+
+/* Shadow container */
+.shadow {
+  font-family: 'Rooney Sans', sans-serif;
+  font-weight: bold;
   width: 30rem; /* Adjusted width */
   height: 20rem; /* Adjusted height */
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+  font-size: 3rem; /* Increased font size */
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.4); /* Slightly more transparent black */
+  grid-row: 1;
+  grid-column: 1;
+  color: #dfdfdf; /* Light grey for text */
+  border-radius: 25px;
+  opacity: 1; /* Background always visible */
+  transition: background-color 0.3s ease-in-out; /* Smooth background transition */
+}
+
+/* Shadow text with transition */
+.shadowText {
+  opacity: 0; /* Hidden by default */
+  transition: opacity 0.2s ease-in-out; /* Smooth fade transition */
+}
+
+/* Text fades in when the 'visible' class is added */
+.shadowText.visible {
+  opacity: 1;
+}
+
+/* Fact container */
+.factContainer {
+  font-family: 'Roboto', sans-serif;
+  width: 30rem;
+  height: 20rem;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  font-size: 1.75rem; /* Increased font size */
+  font-size: 1.75rem;
   padding: 1rem;
-  background-color: #054569; /* Lighter blue for subheading */
+  background-color: #054569; /* Lighter blue */
   grid-row: 1;
   grid-column: 1;
-  color: #c9c9c9; /* Darkened font color for better contrast */
+  color: #c9c9c9; /* Lighter grey for text */
   border-radius: 25px;
+  opacity: 0; /* Hidden by default */
+  transition: opacity 0.3s ease-in-out; /* Smooth fade-in transition */
 }
 
+/* Make fact visible */
+.factContainer.visible {
+  opacity: 1; /* Fade in when visible */
+}
+
+/* Hover and active states for facts */
 .factContainer:hover {
   cursor: grab;
 }
@@ -22,6 +72,7 @@
   cursor: grabbing;
 }
 
+/* Grid layout for facts */
 .factGrid {
   padding-top: 3rem;
   padding-bottom: 12rem;
@@ -30,9 +81,12 @@
   width: 100%;
 }
 
+/* Holder for swipe instructions */
 .holder {
+  font-family: 'Roboto', sans-serif;
   font-size: 1.5rem;
   display: flex;
   padding-top: 7rem;
   justify-content: space-between;
+  color: #b0b0b0; /* Light grey for instructions */
 }
