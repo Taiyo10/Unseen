@@ -1,77 +1,70 @@
-import React, { useState } from "react";
-import { writeFact } from "../../../../Firebase/firebaseUtils"; // Assuming writeFact is exported from your firebase config file
+import React, { useEffect, useState } from "react";
+import { getAllFacts, updateFactCount } from "../../../../Firebase/firebaseUtils"; 
+import styles from "./Game.module.css"; // Import the CSS Module
+import { motion, useMotionValue, useTransform } from 'framer-motion';
 
-const AddFact = () => {
-  const [factText, setFactText] = useState("");
-  const [factSource, setFactSource] = useState("");
-  const [statusMessage, setStatusMessage] = useState("");
+function Game() {
+  const [facts, setFacts] = useState([]); 
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  useEffect(() => {
+    const fetchFacts = async () => {
+      const fetchedFacts = await getAllFacts();
+      if (fetchedFacts) {
+        const shuffledFacts = fetchedFacts.sort(() => Math.random() - 0.5);
+        setFacts(shuffledFacts);
+      } else {
+        setFacts([]);
+      }
+    };
+    fetchFacts();
+  }, []);
 
-    if (!factText.trim() || !factSource.trim()) {
-      setStatusMessage("Please provide both the fact text and source.");
-      return;
+  return (
+    <div>
+      <h1>Game Page</h1>
+      <div className={styles.factGrid}>
+        {facts.map((fact, index) => (
+          <Fact key={index} fact={fact} setFacts={setFacts} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ✅ Fact Component with X Motion Tracking
+const Fact = ({ fact, setFacts }) => {
+  const x = useMotionValue(0); // Track X position
+  const opacity = useTransform(x, [-400, 0, 400], [0, 1, 0]);
+  const rotate = useTransform(x, [-400, 400], [-18, 18]);
+
+  const handleDragEnd = () => {
+    if (x.get() > 300) {
+      // Fact dragged beyond threshold for "seen"
+      updateFactCount(fact.factId, "seen");
+      removeFactFromList(fact.factId);
     }
-
-    try {
-      // Call writeFact to save the fact
-      await writeFact({
-        text: factText.trim(),
-        source: factSource.trim(),
-        seenCount: 0, // Initialize with 0 for seenCount
-        notSeenCount: 0, // Initialize with 0 for notSeenCount
-      });
-
-      // Clear the input fields and show success message
-      setFactText("");
-      setFactSource("");
-      setStatusMessage("Fact added successfully!");
-    } catch (error) {
-      console.error("Error adding fact:", error);
-      setStatusMessage("Failed to add the fact. Please try again.");
+    if (x.get() < -300) {
+      // Fact dragged beyond threshold for "unseen"
+      updateFactCount(fact.factId, "unseen");
+      removeFactFromList(fact.factId);
     }
   };
 
+  const removeFactFromList = (factId) => {
+    setFacts((prevFacts) => prevFacts.filter((fact) => fact.factId !== factId));
+  };
+
   return (
-    <div style={{ padding: "20px", maxWidth: "400px", margin: "0 auto" }}>
-      <h2>Add a New Fact</h2>
-      <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: "10px" }}>
-          <label>
-            Fact Text:
-            <textarea
-              value={factText}
-              onChange={(e) => setFactText(e.target.value)}
-              rows={4}
-              style={{ width: "100%", resize: "none", marginTop: "5px" }}
-              placeholder="Enter the fact text"
-            />
-          </label>
-        </div>
-        <div style={{ marginBottom: "10px" }}>
-          <label>
-            Source:
-            <input
-              type="text"
-              value={factSource}
-              onChange={(e) => setFactSource(e.target.value)}
-              style={{ width: "100%", marginTop: "5px" }}
-              placeholder="Enter the source of the fact"
-            />
-          </label>
-        </div>
-        <button type="submit" style={{ padding: "10px 20px", marginTop: "10px" }}>
-          Add Fact
-        </button>
-      </form>
-      {statusMessage && (
-        <p style={{ marginTop: "10px", color: statusMessage.includes("successfully") ? "green" : "red" }}>
-          {statusMessage}
-        </p>
-      )}
-    </div>
+    <motion.div
+      className={styles.factContainer}
+      drag="x" // Allow dragging only in the X direction
+      dragConstraints={{ left: -400, right: 400 }} // Limit dragging range
+      onDragEnd={handleDragEnd} // Trigger when drag ends
+      style={{ x, opacity, rotate }} // Attach motion value
+    >
+      {fact.text}
+    </motion.div>
   );
 };
 
-export default AddFact;
+export default Game;

@@ -11,7 +11,7 @@ function Explore() {
   useEffect(() => {
     const fetchrandFacts = async () => {
       try {
-        const factsData = await getRandUnknown(); // Fetch the data
+        const factsData = await getRandUnknown(4); // Fetch the data
         console.log("Fetched facts:", factsData);
         setData(factsData || []); // Set the data state (fallback to an empty array)
       } catch (error) {
@@ -23,7 +23,12 @@ function Explore() {
 
   return (
     <div className={styles.exploreContainer}>
-      <h1>Explore Facts</h1>
+      <br>
+      </br>
+      <h1>Explore the Unknown</h1>
+      <p className={styles.pageDescription}>
+        Dive into a collection of fascinating and lesser-known facts, waiting to be explored. Scroll down to discover more!
+      </p>
       <div className={styles.grid}>
         {data.map((fact) => (
           <div
@@ -35,6 +40,7 @@ function Explore() {
             <div className={styles.cardContent}>
               <h3>{fact.text}</h3>
               <p>{fact.source}</p>
+              <p>{fact.unseenPercent}% of people did not know this fact</p>
             </div>
           </div>
         ))}

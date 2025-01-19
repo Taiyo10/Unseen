@@ -3,7 +3,7 @@
 
 /* Global body styles for the background image */
 body {
-  background-image: url('./pages/background2.jpg'); /* Replace with your image path */
+  background-image: url('./pages/earthimagee.jpg'); /* Replace with your image path */
   background-size: cover; /* Scale the image to cover the entire viewport */
   background-position: center; /* Center the image */
   background-attachment: fixed; /* Makes the background static when scrolling */
@@ -11,7 +11,7 @@ body {
   margin: 0; /* Reset body margin */
   padding: 0; /* Reset body padding */
   color: #fff; /* Ensure text color contrasts with the background */
-  font-family: 'Roboto', sans-serif; 
+  font-family: 'Poppins', sans-serif; 
   background-color: #121212; /* Dark background for the entire page */
   color: #fff;               /* Light text for better readability */
   font-family: Arial, sans-serif;
@@ -96,6 +96,18 @@ body {
 .tab-bar a:active {
   background-color: #777;   /* Even darker background when active */
 }
+
+.footer-container {
+  text-align: center;
+  padding: 20px;
+  color: #fff;
+  margin-top: auto;  /* Push footer to the bottom */
+}
+
+.footer-container p {
+  margin: 0;
+}
+
 
 /* Responsive design */
 @media (max-width: 768px) {
