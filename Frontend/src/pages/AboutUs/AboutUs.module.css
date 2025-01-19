@@ -3,20 +3,22 @@
 /* About Us Page Styling */
 .about-us-container {
     font-family: 'Roboto', sans-serif;
-    background-color: #fff; /* Changed background to white */
+    background-color: rgba(55, 49, 49, 0.7);
+     /* Changed background to white */
     max-width: 800px; /* Limits the width of the container */
     margin: 50px auto; /* Centers the container on the page */
     padding: 30px; /* Adds more padding for a spacious feel */
     border-radius: 15px; /* Rounded corners for a softer look */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Adds a larger shadow for depth */
     line-height: 1.8; /* Improves readability */
-    color: #333; /* Dark text for better readability on a white background */
+    color: #fffdfd;
+    /* Dark text for better readability on a white background */
 }
 
 /* Heading Style */
 .about-us-container h1 {
     font-family: 'Roboto', sans-serif;
-    color: #054569; /* Light color for the heading */
+    color: #ffffff; /* Light color for the heading */
     font-size: 60px;
     text-align: center; /* Centers the heading */
     margin-bottom: 30px; /* Adds space below the heading */
@@ -27,7 +29,7 @@
 /* Paragraph Styling */
 .about-us-container p {
     font-family: 'Roboto', sans-serif;
-    color: #555; /* Slightly darker text for better readability on white */
+    color: #fffefe; /* Slightly darker text for better readability on white */
     font-size: 18px;
     margin-bottom: 20px; /* Adds spacing between paragraphs */
     text-align: justify; /* Justifies the text for a clean alignment */
@@ -76,7 +78,7 @@
 body {
     font-family: 'Roboto', sans-serif;
     background-color: #121212; /* Dark background for the entire page */
-    color: #fff; /* Light text for the entire page */
+    color: #ffffff; /* Light text for the entire page */
     margin: 0;
     display: flex;
     justify-content: center; /* Horizontally center the container */
