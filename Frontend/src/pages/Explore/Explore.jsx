@@ -1,54 +1,68 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import styles from "./Explore.module.css"; // Import your CSS module
-import { getRandUnknown } from "../../../../Firebase/firebaseUtils";
+import { getAllFacts, updateFactCount } from "../../../../Firebase/firebaseUtils"; 
+import styles from "./Explore.module.css"; // Import the CSS Module
+import { motion, useMotionValue, useTransform } from "framer-motion";
 
 function Explore() {
-  const [data, setData] = useState([]);
-  const navigate = useNavigate();
+  const [facts, setFacts] = useState([]);
 
   useEffect(() => {
-    const fetchrandFacts = async () => {
-      try {
-        const factsData = await getRandUnknown(6); // Fetch the data
-        console.log("Fetched facts:", factsData);
-        setData(factsData || []); // Fallback to an empty array
-      } catch (error) {
-        console.error("Error fetching facts:", error);
+    const fetchFacts = async () => {
+      const fetchedFacts = await getAllFacts();
+      if (fetchedFacts) {
+        const shuffledFacts = fetchedFacts.sort(() => Math.random() - 0.5);
+        setFacts(shuffledFacts);
+      } else {
+        setFacts([]);
       }
     };
-    fetchrandFacts();
+    fetchFacts();
   }, []);
 
-  const handleFactClick = (link) => {
-    window.open(link, "_blank"); // Opens the link in a new tab
-  };
-
   return (
-    <div className={styles.exploreContainer}>
-      <h1>Explore the Unknown</h1>
-      <p className={styles.pageDescription}>
-        Dive into a collection of fascinating and lesser-known facts. Scroll down to discover more!
-      </p>
-      <div className={styles.grid}>
-        {data.map((fact) => (
-          <div
-            key={fact.factId}
-            className={styles.card}
-            onClick={(e) => { e.stopPropagation(); handleFactClick(fact.source);}}
-          >
-            <div className={styles.cardContent}>
-              <h3>{fact.text}</h3>
-              <p className={styles.source}>{fact.sourceShort}</p>
-              <p className={styles.unseenPercent}>
-                {fact.unseenPercent}% of people did not know this fact
-              </p>
-            </div>
-          </div>
+    <div className={styles.container}>
+      <div className={styles.holder}><div>&lt;&lt; Swipe Unseen</div><div>Swipe Seen &gt;&gt;</div></div>
+      <div className={styles.factGrid}>
+        {facts.map((fact, index) => (
+          <Fact key={index} fact={fact} setFacts={setFacts} />
         ))}
       </div>
     </div>
   );
 }
+
+// ✅ Fact Component with X Motion Tracking
+const Fact = ({ fact, setFacts }) => {
+  const x = useMotionValue(0);
+  const opacity = useTransform(x, [-300, 0, 300], [0, 1, 0]);
+  const rotate = useTransform(x, [-300, 300], [-18, 18]);
+
+  const handleDragEnd = () => {
+    if (x.get() > 150) {
+      updateFactCount(fact.factId, "seen");
+      removeFactFromList(fact.factId);
+    }
+    if (x.get() < -150) {
+      updateFactCount(fact.factId, "unseen");
+      removeFactFromList(fact.factId);
+    }
+  };
+
+  const removeFactFromList = (factId) => {
+    setFacts((prevFacts) => prevFacts.filter((fact) => fact.factId !== factId));
+  };
+
+  return (
+    <motion.div
+      className={styles.factContainer}
+      drag="x"
+      dragConstraints={{ left: 0, right: 0 }}
+      onDragEnd={handleDragEnd}
+      style={{ x, opacity, rotate }}
+    >
+      {fact.text}
+    </motion.div>
+  );
+};
 
 export default Explore;

@@ -1,102 +1,46 @@
-/* Main Container */
-.exploreContainer {
-    padding: 20px;
-    text-align: center;
-    color: #fff; /* White text to contrast the dark background */
-    background: url('/path/to/your/earth-sunrise.jpg') no-repeat center center fixed;
-    background-size: cover; /* Cover the entire container */
-    min-height: 100vh; /* Ensure full-page height */
+
+.factContainer {
+    width: 30rem; /* Adjusted width */
+    height: 20rem; /* Adjusted height */
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    gap: 30px; /* Space between elements */
-  }
-  
-  /* Page Title */
-  h1 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6); /* Add shadow for readability */
-    text-transform: uppercase;
-  }
-  
-  /* Page Description */
-  .pageDescription {
-    font-size: 1.2rem;
-    max-width: 600px;
+    align-items: center;
     text-align: center;
-    color: #d3d3d3; /* Light gray for subtle contrast */
-  }
-  
-  /* Card Grid */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    width: 100%;
-    max-width: 1200px;
-  }
-  
-  /* Card Styling */
-  .card {
+    font-size: 1.75rem; /* Increased font size */
+    padding: 1rem;
+    background-color: #054569; /* Lighter blue for subheading */
+    grid-row: 1;
+    grid-column: 1;
+    color: #c9c9c9; /* Darkened font color for better contrast */
+    border-radius: 25px;
     background: rgba(255, 255, 255, 0.1); /* Transparent white */
     border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
     backdrop-filter: blur(10px); /* Glassmorphism effect */
-    border-radius: 15px;
-    overflow: hidden;
-    padding: 20px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 300px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow */
   }
   
-  /* Card Hover Effect */
-  .card:hover {
-    transform: translateY(-10px) scale(1.03); /* Subtle zoom effect */
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5); /* Deeper shadow */
+  .factContainer:hover {
+    cursor: grab;
   }
   
-  /* Card Content */
-  .cardContent h3 {
-    font-size: 1.4rem;
-    margin-bottom: 15px;
-    color: #fff; /* Keep headings white for contrast */
-    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.6);
+  .factContainer:active {
+    cursor: grabbing;
   }
   
-  .cardContent p {
-    font-size: 1rem;
-    color: #d3d3d3; /* Light gray for subtler text */
-    margin: 5px 0;
+  .factGrid {
+    padding-top: 3rem;
+    padding-bottom: 12rem;
+    display: grid;
+    place-items: center;
+    width: 100%;
   }
   
-  .source {
-    font-style: italic;
-    color: #ccc; /* Lighter gray for the source */
-  }
-  
-  .unseenPercent {
-    font-weight: bold;
-    color: #9ccddc; /* Light blue for emphasis */
-  }
-  
-  /* Responsive Adjustments */
-  @media (max-width: 768px) {
-    h1 {
-      font-size: 2rem;
-    }
-  
-    .pageDescription {
-      font-size: 1rem;
-    }
-  
-    .card {
-      height: auto; /* Allow cards to adjust height on smaller screens */
-    }
+  .holder {
+    font-size: 1.5rem;
+    display: flex;
+    padding-top: 7rem;
+    justify-content: space-between;
   }
   
