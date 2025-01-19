@@ -70,8 +70,8 @@ export const updateFactCount = async(factId, type) => {
     const factRef = ref(database, 'facts/' + factId); //gets reference to fact
     try {
         const snapshot = await get(factRef) //gets data at factRef location
-        if (snapshot.exists) {
-            const factData = snapshot.val //Gets data from snapshot
+        if (snapshot.exists()) {
+            const factData = snapshot.val() //Gets data from snapshot
             const updatedData = {} //Holds new updated object
             if (type == 'seen') {
                 updatedData.seenCount = factData.seenCount + 1; //gets new value
