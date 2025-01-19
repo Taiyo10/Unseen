@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { getAllFacts, updateFactCount } from "../../../../Firebase/firebaseUtils"; 
 import styles from "./Game.module.css"; // Import the CSS Module
-import { motion, useMotionValue, useTransform } from 'framer-motion';
+import { motion, useMotionValue, useTransform } from "framer-motion";
 
 function Game() {
-  const [facts, setFacts] = useState([]); 
+  const [facts, setFacts] = useState([]);
 
   useEffect(() => {
     const fetchFacts = async () => {
@@ -20,8 +20,8 @@ function Game() {
   }, []);
 
   return (
-    <div>
-      <h1>Game Page</h1>
+    <div className={styles.container}>
+      <div className={styles.holder}><div>&lt;&lt; Swipe Unseen</div><div>Swipe Seen &gt;&gt;</div></div>
       <div className={styles.factGrid}>
         {facts.map((fact, index) => (
           <Fact key={index} fact={fact} setFacts={setFacts} />
@@ -33,18 +33,16 @@ function Game() {
 
 // ✅ Fact Component with X Motion Tracking
 const Fact = ({ fact, setFacts }) => {
-  const x = useMotionValue(0); // Track X position
+  const x = useMotionValue(0);
   const opacity = useTransform(x, [-400, 0, 400], [0, 1, 0]);
   const rotate = useTransform(x, [-400, 400], [-18, 18]);
 
   const handleDragEnd = () => {
     if (x.get() > 300) {
-      // Fact dragged beyond threshold for "seen"
       updateFactCount(fact.factId, "seen");
       removeFactFromList(fact.factId);
     }
     if (x.get() < -300) {
-      // Fact dragged beyond threshold for "unseen"
       updateFactCount(fact.factId, "unseen");
       removeFactFromList(fact.factId);
     }
@@ -57,10 +55,10 @@ const Fact = ({ fact, setFacts }) => {
   return (
     <motion.div
       className={styles.factContainer}
-      drag="x" // Allow dragging only in the X direction
-      dragConstraints={{ left: -400, right: 400 }} // Limit dragging range
-      onDragEnd={handleDragEnd} // Trigger when drag ends
-      style={{ x, opacity, rotate }} // Attach motion value
+      drag="x"
+      dragConstraints={{ left: -400, right: 400 }}
+      onDragEnd={handleDragEnd}
+      style={{ x, opacity, rotate }}
     >
       {fact.text}
     </motion.div>

@@ -15,7 +15,7 @@ function Home() {
         <p className={styles.quote}>Discover the Facts That Matter</p>
         <button
           className={styles.startButton}
-          onClick={() => navigate('./pages/Game')} // Navigate to the "Game" page
+          onClick={() => navigate('./game')} // Navigate to the "Game" page
         >
           Start
         </button>

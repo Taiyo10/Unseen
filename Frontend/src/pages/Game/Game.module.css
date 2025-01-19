@@ -1,28 +1,38 @@
 .factContainer {
-    width: 70rem;
-    height: 50rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid black;
-    text-align: center;
-    font-size: 1.5rem;
-    padding: 1rem;
-    background-color: #f0f0f0;
-    grid-row: 1;
-    grid-column: 1;
-  }
+  width: 30rem; /* Adjusted width */
+  height: 20rem; /* Adjusted height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 1.75rem; /* Increased font size */
+  padding: 1rem;
+  background-color: #054569; /* Lighter blue for subheading */
+  grid-row: 1;
+  grid-column: 1;
+  color: #c9c9c9; /* Darkened font color for better contrast */
+  border-radius: 25px;
+}
 
-  .factContainer:hover {
-    cursor: grab;
-  }
+.factContainer:hover {
+  cursor: grab;
+}
 
-  .factContainer:active {
-    cursor: grabbing;
-  }
-  
-  .factGrid {
-    display: grid;
-    place-items: center;
-    width: 100%;
-  }
+.factContainer:active {
+  cursor: grabbing;
+}
+
+.factGrid {
+  padding-top: 3rem;
+  padding-bottom: 12rem;
+  display: grid;
+  place-items: center;
+  width: 100%;
+}
+
+.holder {
+  font-size: 1.5rem;
+  display: flex;
+  padding-top: 7rem;
+  justify-content: space-between;
+}
