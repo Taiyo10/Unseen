@@ -34,15 +34,15 @@ function Game() {
 // ✅ Fact Component with X Motion Tracking
 const Fact = ({ fact, setFacts }) => {
   const x = useMotionValue(0);
-  const opacity = useTransform(x, [-400, 0, 400], [0, 1, 0]);
-  const rotate = useTransform(x, [-400, 400], [-18, 18]);
+  const opacity = useTransform(x, [-300, 0, 300], [0, 1, 0]);
+  const rotate = useTransform(x, [-300, 300], [-18, 18]);
 
   const handleDragEnd = () => {
-    if (x.get() > 300) {
+    if (x.get() > 150) {
       updateFactCount(fact.factId, "seen");
       removeFactFromList(fact.factId);
     }
-    if (x.get() < -300) {
+    if (x.get() < -150) {
       updateFactCount(fact.factId, "unseen");
       removeFactFromList(fact.factId);
     }
@@ -56,7 +56,7 @@ const Fact = ({ fact, setFacts }) => {
     <motion.div
       className={styles.factContainer}
       drag="x"
-      dragConstraints={{ left: -400, right: 400 }}
+      dragConstraints={{ left: 0, right: 0 }}
       onDragEnd={handleDragEnd}
       style={{ x, opacity, rotate }}
     >
