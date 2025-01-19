@@ -28,7 +28,7 @@ function Learn() {
     <div className={styles.learnContainer}>
       <h1>Learn the Unknown</h1>
       <p className={styles.pageDescription}>
-        Explore the world through a new perspective. Click to find out more!
+        See the world through a new perspective. Click to find out more!
       </p>
       <div className={styles.grid}>
         {data.map((fact) => (

@@ -40,8 +40,8 @@ function Explore() {
   return (
     <div className={styles.container}>
       <div className={styles.holder}>
-        <div>&lt;&lt; Swipe Unseen</div>
-        <div className={styles.swipeUnseen}>Swipe Seen &gt;&gt;</div>
+        <div>&lt;&lt; Swipe Unknown</div>
+        <div className={styles.swipeUnseen}>Swipe Known &gt;&gt;</div>
       </div>
       <div className={styles.factGrid}>
         {previousFact && (
@@ -49,12 +49,12 @@ function Explore() {
             <p
               className={`${styles.shadowText} ${showPercentages ? styles.visible : ""}`}
             >
-              Unseen: {previousFact.unseenPercent}%
+              Unknown: {previousFact.unseenPercent}%
             </p>
             <p
               className={`${styles.shadowText} ${showPercentages ? styles.visible : ""}`}
             >
-              Seen: {previousFact.seenPercent}%
+              Known: {previousFact.seenPercent}%
             </p>
           </div>
         )}
