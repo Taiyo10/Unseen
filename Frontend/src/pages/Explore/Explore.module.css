@@ -1,3 +1,43 @@
+/* Global Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif; /* Default font for body */
+}
+
+/* Shadow container */
+.shadow {
+  font-family: 'Rooney Sans', sans-serif;
+  font-weight: bold;
+  width: 30rem; /* Adjusted width */
+  height: 20rem; /* Adjusted height */
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+  font-size: 3rem; /* Increased font size */
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.4); /* Slightly more transparent black */
+  grid-row: 1;
+  grid-column: 1;
+  color: #dfdfdf; /* Light grey for text */
+  border-radius: 25px;
+  opacity: 1; /* Background always visible */
+  transition: background-color 0.3s ease-in-out; /* Smooth background transition */
+}
+
+/* Shadow text with transition */
+.shadowText {
+  opacity: 0; /* Hidden by default */
+  transition: opacity 0.2s ease-in-out; /* Smooth fade transition */
+}
+
+/* Text fades in when the 'visible' class is added */
+.shadowText.visible {
+  opacity: 1;
+}
+
 
 .factContainer {
     width: 30rem; /* Adjusted width */
@@ -20,27 +60,43 @@
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow */
   }
-  
-  .factContainer:hover {
-    cursor: grab;
-  }
-  
-  .factContainer:active {
-    cursor: grabbing;
-  }
-  
-  .factGrid {
-    padding-top: 3rem;
-    padding-bottom: 12rem;
-    display: grid;
-    place-items: center;
-    width: 100%;
-  }
-  
-  .holder {
-    font-size: 1.5rem;
-    display: flex;
-    padding-top: 7rem;
-    justify-content: space-between;
-  }
-  
+ 
+/* Make fact visible */
+.factContainer.visible {
+  opacity: 1; /* Fade in when visible */
+}
+
+/* Hover and active states for facts */
+.factContainer:hover {
+  cursor: grab;
+}
+
+.factContainer:active {
+  cursor: grabbing;
+}
+
+/* Grid layout for facts */
+.factGrid {
+  padding-top: 3rem;
+  padding-bottom: 12rem;
+  display: grid;
+  place-items: center;
+  width: 100%;
+}
+
+/* Holder for swipe instructions */
+.holder {
+  font-family: 'Roboto', sans-serif;
+  font-size: 2rem;
+  display: flex;
+  padding-top: 7rem;
+  justify-content: center; /* Centers the text */
+  gap: 1rem; /* Adjust the gap between the texts (increase or decrease as needed) */
+  color: #c0bebe; /* Light grey for instructions */
+  font-weight: bold;
+}
+
+/* If you want to move the "Swipe Unseen" text slightly to the left */
+.swipeUnseen {
+  margin-left: 3rem; /* Adjust this value to fine-tune the centering */
+}
