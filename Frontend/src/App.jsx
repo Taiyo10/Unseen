@@ -36,7 +36,7 @@ function App() {
         </Routes>
         {/* Footer */}
         <footer className="footer-container">
-          <p>© 2025 Unseen. All rights reserved.</p>
+          <p>Made for UofTHacks</p>
         </footer>
       </div>
     </Router>
