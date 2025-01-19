@@ -36,7 +36,7 @@ function AboutUs() {
         </p>
         <h2>Our Team</h2>
         <p>
-          Unseen was brought to life by a dedicated team of innovators: <strong>Allen, Theo, Nehal, and Pragya</strong>. 
+          Unseen was brought to life by a dedicated team of innovators: <strong>Allen, Teo, Nehal, and Pragya</strong>. 
           With a shared passion for education and a commitment to empowering individuals through knowledge, 
           we are excited to share this journey with you.
         </p>

@@ -2,11 +2,12 @@ import {database} from './firebaseConfig';
 import { ref, set, get, query, orderByChild, equalTo } from "firebase/database";
 
 //Writes facts to database
-export const writeFact = async (factId, text, source, seenCount = 0, unseenCount = 0, isUnknown = false, seenPercent = 100, unseenPercent = 100) => {
+export const writeFact = async (factId, text, source, sourceShort, seenCount = 0, unseenCount = 0, isUnknown = false, seenPercent = 100, unseenPercent = 100) => {
     const factRef = ref(database, 'facts/' + factId);
     await set(factRef, {
         text,
         source,
+        sourceShort,
         seenCount,
         unseenCount,
         isUnknown,
@@ -56,21 +57,24 @@ export const updateFactCount = async (factId, type) => {
         
         //Updates unknown if number work
         const totalCount = factData.seenCount + factData.unseenCount;
-        if ((factData.unseenCount / totalCount >= 0.7) && (factData.isUnknown = false)) {
+        if ((factData.unseenCount / totalCount >= 0.5) && (factData.isUnknown === false)) {
             factData.isUnknown = true;
             console.log("Updating Unknown");
         }
 
-        factData.seenPercent = Math.round((factData.seenCount/totalCount) * 100);
-        factData.unseenPercent = Math.round((factData.unseenCount/totalCount) * 100);
-        
+        if (totalCount > 0){
+            factData.seenPercent = Math.round((factData.seenCount/totalCount) * 100);
+            factData.unseenPercent = Math.round((factData.unseenCount/totalCount) * 100);
+        } else {
+            factData.seenPercent = 0;
+            factData.unseenPercent = 0;
+        }
         // Update the fact with the new counts
         await set(factRef, {
           ...factData,
           ...updatedData,
         });
         
-  
         console.log("Fact updated successfully ");
       }
     } catch (error) {
