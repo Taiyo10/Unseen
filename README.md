@@ -1,3 +1,3 @@
 # Unseen
 Project for Uoft Hacks 12!
-Created by Theo, Allen, Nehal and pragya
+Created by Teo Cristante, Allen Reinoso, Nehal Goel and Pragya Chaturvedi
